@@ -56,5 +56,38 @@ namespace OOPsDriver
         //  for the property
         public int FaceValue { get; set; }
 
+        //within a property you can validate that 
+        //the incoming data value is "what is expected"
+        private string _Color;
+        public string Color
+        {
+            get
+            {
+                return _Color;
+            }
+            set
+            {
+                //sample validation 
+                //there MUST be data within the incoming value
+                // so an empty string is invalid
+                if (string.IsNullOrEmpty(value))
+                {
+                    //incoming data is incorrect
+                    // A) you could send an error message to the outside user
+                    throw new Exception("Color must have a value");
+
+                    // B) you could alow the storage of a null value
+                    //  within the string data member
+                    _Color = null;
+
+                }
+                else
+                {
+                    _Color = value;
+                }
+            }
+        }
+
+
     }
 }
