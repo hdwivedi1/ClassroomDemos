@@ -39,7 +39,7 @@ namespace OOPsDriver
                 //this will return the private data member
                 return _Sides;
             }
-            set
+            private set
             {
                 //the reserved keyword "value" is used to 
                 //  obtain the incoming data value to the property
@@ -54,18 +54,89 @@ namespace OOPsDriver
         //  does not have a private data member 
         // the system creates an internal data storage member 
         //  for the property
-        public int FaceValue { get; set; }
+        //  for the outside use this property is read only
+        //Methods and code WITHIN the class still have access to set{}
+        public int FaceValue { get; private set; }
 
         //within a property you can validate that 
         //the incoming data value is "what is expected"
         private string _Color;
-        public string Color
+        public string Color;
+
+            //constructors
+            //constructors are NOT directly called by the outside user
+            //constructors are called indirectly when the outside user
+            //  creates an instance of the class 
+            //to create an instance of the class 
+            //to create an instance of the class the outside user
+            //  will declare --> class variablename = new class();
+            //it is the "new" that calls the constructor
+            //you may or may not have a constructor for your class
+            //IF you do not code a constructor for your class then
+            //  a default system constructor is executed
+            //This defualt system constructor initializes your local 
+            //  Data members to there default C# values.
+
+        //if you do code a constructor for your class then 
+        //      YOU are responsible for all/any constructor in the class
+
+        //"Default" Constructor 
+        //This constructor is similar to the system constructor 
+        //  this constructor would be called for --> new classname();
+        public Die()
+        {
+            // even though the sides would be set to a value numeric 
+            //  within this class a more logical value would be 6
+            Sides = 6;
+            Color = "White";
+            Roll();
+        }
+
+        //"Greedy" Constructor 
+        //  this constructor usually recieves a list of parameters,
+        //  one for each data member in the class 
+        //the constructor takes the parameter values and assigns 
+        //  the value to the appropriate data member
+        //this constructor would be called for --> new classname(value1, value2,.......)
+        public Die(string sides, string color)
+
+                //Behaviors
+                //these are methods
+        public void Roll()
+        {
+            //will be used to generate a new facevalue for the instance
+            //an instance of the math class random() has been coded at the top of the this class
+            //the method in the class Random that will be called is 
+            //  .Next(inclusive lowest number, exclusive highest number)
+            FaceValue = _rnd.Next(1, Sides + 1);
+        }
+
+        public void SetSides(int sides)
+        {
+            //let us assume only 6 to 20 sided dice are allowed
+            if (sides > 5 && sides < 21)
+            {
+                Sides = sides;
+                Roll();
+            }
+            else
+            {
+                //bad input
+                throw new Exception("Invalid number of sides for the die");
+            }
+            }
+        }
+             {
+                Sides = sides; //the set {} of the property Sides is used
+            Color = color; 
+             }
+
         {
             get
             {
                 return _Color;
             }
-            set
+set
             {
                 //sample validation 
                 //there MUST be data within the incoming value
@@ -76,9 +147,9 @@ namespace OOPsDriver
                     // A) you could send an error message to the outside user
                     throw new Exception("Color must have a value");
 
-                    // B) you could alow the storage of a null value
-                    //  within the string data member
-                    _Color = null;
+// B) you could alow the storage of a null value
+//  within the string data member
+_Color = null;
 
                 }
                 else
@@ -86,7 +157,9 @@ namespace OOPsDriver
                     _Color = value;
                 }
             }
-        }
+        }//eop
+
+
 
 
     }
