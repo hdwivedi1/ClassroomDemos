@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4DF7C203-9B05-4C5B-BD40-2A4BC2D56FEF}</ProjectGuid>
+    <ProjectGuid>{AFCF0663-7E56-43F1-885D-19E1CA8C364F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>OOPsDriver</RootNamespace>
     <AssemblyName>OOPsDriver</AssemblyName>

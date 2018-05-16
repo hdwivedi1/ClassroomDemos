@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace OOPsDriver
 {
-    class Turn
+     class Turn
     {
         public int Player1DiceValue { get; set; }
         public int Player2DiceValue { get; set; }
-        public string TurnWinner {get; set;}
+        public string TurnWinner { get; set; }
     }
 }
