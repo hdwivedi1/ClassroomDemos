@@ -1,10 +1,70 @@
 ﻿@{
-    @{
-        Page.Title = "DropDown";
-        Layout = "~/_LayoutPage.cshtml";
-    }
-    @section banner{
-        <h1>DropDown</h1> }
-}
+    Page.Title = "DropDown";
+    Layout = "~/_LayoutPage.cshtml";
 
+    var choices = Request.Form["CodingSample"];
+}
+@section banner{
+    <h1>DropDown</h1> }
+
+
+<div>
+    @if (IsPost)
+    {
+        switch (choices.ToUpper())
+        {
+            case "TEXTBOXES":
+                {
+                    //Use the response object's method redirect("page name")
+                    //  to send the user to a specific page
+                    //Use relative addressing in referencing your page
+                    Response.Redirect("TextBoxes.cshtml");
+                    break;
+                }
+            case "RADIOBUTTONS":
+                {
+
+                    Response.Redirect("RadioButtons.cshtml");
+                    break;
+                }
+            case "CHECKBOXES":
+                {
+
+                    Response.Redirect("CheckBoxes.cshtml");
+                    break;
+                }
+            default:
+                {
+                    //is a message if the prompt line is the current option choice
+                    <p><span style="color:firebrick">Make a selection from the list of sample choices.</span></p>
+                    break;
+                }
+        }
+    }
+
+    <form id="theForm" action="" method="post">
+        <div class="col-md-offset-1">
+            <label id="forCodingSample">Select the sample to view</label>
+            <!--The Select tag is used to create the dopdown control
+                Each item in the control is specified using the Option tag
+                to set an item to be the selected item, use the Option tag
+                parameter Selected
+            If no item has been selected then the first Option is the default
+                option that is shown
+            Often you will see that the first choice is a prompt from the
+                control. This is refered to as a prompt line-->
+
+            <select name="CodingSample">
+                <option value="">Select...</option>
+                <option value="Textboxes">TextBoxes</option>
+                <option value="RadioButtons">RadioButtons</option>
+                <option value="CheckBoxes">CheckBoxes</option>
+            </select>
+            &nbsp;&nbsp;
+            <button type="submit" name="formbutton" value="submit" class="btn btn-primary">
+                Go To .....
+            </button>
+        </div>
+    </form>
+</div>
 
