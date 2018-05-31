@@ -114,6 +114,7 @@
     <Content Include="Controls\RadioButtons.cshtml" />
     <Content Include="Controls\DropDown.cshtml" />
     <Content Include="Controls\CheckBoxes.cshtml" />
+    <Content Include="DBPages\DBSingleQuery.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -131,6 +132,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="_LayoutPage.cshtml" />
+    <Content Include="WebConnectionString.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
