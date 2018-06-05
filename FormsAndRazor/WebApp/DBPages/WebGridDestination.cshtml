@@ -1,0 +1,16 @@
+﻿@{
+    Page.Title = "WebGrid Dest.";
+    Layout = "~/_LayoutPage.cshtml";
+
+    var pid = Request.QueryString["pid"];
+    var pn = Request.QueryString["pn"];
+}
+
+@section banner{
+   <h1>Database: Filter Multi-Record Query</h1> }
+    <div>
+        You pass the product @pn (@pid)
+    </div>
+    
+
+

@@ -1,0 +1,41 @@
+﻿<!-- this will be the menu area -->
+<div class="navbar navbar-default navbar-fixed-top">
+    <!-- this will be the title on the menu (brand)-->
+    <div class="navbar-header">
+        <a class="navbar-brand" style="font-size:x-large">
+            <strong>Razor Samples</strong>
+        </a>
+    </div>
+    <!-- this will be the menu root items-->
+    <ul class="nav navbar-nav">
+        <!-- this will be a menu item -->
+        <li><a href="@Href("~/default.cshtml")">Home</a></li>
+        <!-- creating a dropdown menu-->
+        <li class="dropdown">
+            <!--this will be the menu root item-->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Controls
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="@Href("~/Controls/TextBoxes.cshtml")">Text Boxes</a></li>
+                <li><a href="@Href("~/Controls/DropDown.cshtml")">Drop Down</a></li>
+                <li><a href="@Href("~/Controls/RadioButtons.cshtml")">Radio Buttons</a></li>
+                <li><a href="@Href("~/Controls/CheckBoxes.cshtml")">Checkboxes</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown">
+            <!--this will be the menu root item-->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                DB Samples
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="@Href("~/DBPages/DBSingleQuery.cshtml")">Single Query</a></li>
+                <li><a href="@Href("~/DBPages/MultiRecordQuery.cshtml")">Filter Query</a></li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
