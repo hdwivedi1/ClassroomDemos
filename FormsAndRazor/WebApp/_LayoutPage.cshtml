@@ -11,12 +11,11 @@
 </head>
 <body>
     <div class="container-fluid">
-        <!--RenderPage() will bring in the referenced page and place
+        <!-- RenderPage() will physical bring in the referenced page and place
             the code in this location-->
-
         @RenderPage("_Menu.cshtml")
         <br /><br />
-
+        
         <div class="jumbotron">
             @RenderSection("banner", required: true)
         </div>
