@@ -4,8 +4,8 @@
     var thebutton = Request.Form["formButton"];
 
     var productname = "";
-    var supplierid = "";
-    var categoryid = "";
+    var supplierid = "0";  //the value 0 points to the prompt line
+    var categoryid = "0";
     var quantityperunit = "";
     var unitprice = "";
     var unitsinstock = "";
@@ -25,60 +25,54 @@
     var categorylist = db.Query(categoryquery);
 
     //these are some server side validation controls
-    //www.mikesdotnetting.com/article/191/validation-in-razor-web-pages-2
+    //www.mikesdotnetting.com/article/191/validation-in-Raxor-web-pages-2
 
-
-    //required with a string length check
+    //required with stringlength check
     //syntax
     //Validation.Add("controlname",
-    //  Validator.xxxxx(parameters)[,Validator.yyyy(parameters)...);
+    //   Validator.xxxxx(parameters)[,Validator.yyyyy(parameters)...);
+
     Validation.Add("ProductName",
-            Validator.Required("Product Name Is Required"),
-            Validator.StringLength(40, 1, "Product name is limited to 40 characters"));
-
+        Validator.Required("Product Name is required"),
+        Validator.StringLength(40,1,"Product name is limited to 40 characters"));
     Validation.Add("QuantityPerUnit",
-           Validator.StringLength(20, 0, "Quanity per unit is limited to 20 characters"));
-
+        Validator.StringLength(20, 0, "quantity per unit is limited to 20 characters"));
     Validation.Add("UnitPrice",
-           Validator.Range(0.00, double.MaxValue, "Unit price must be 0 or greater"));
-
+        Validator.Range(0.00,double.MaxValue,"Unit price must be 0 or greater"));
     Validation.Add("UnitsInStock",
-           Validator.Range(0, Int16.MaxValue, "Units in stock must between 0 and 32767"));
-
+        Validator.Range(0, Int16.MaxValue, "Units in stock must be between 0 and 32767"));
     Validation.Add("UnitsOnOrder",
-           Validator.Range(0, Int16.MaxValue, "Product name is limited to 40 characters"));
-
+        Validator.Range(0, Int16.MaxValue, "Units on order must be between 0 and 32767"));
     Validation.Add("ReorderLevel",
-           Validator.Range(0, Int16.MaxValue, "Product name is limited to 40 characters"));
+        Validator.Range(0, Int16.MaxValue, "Reorder level must be between 0 and 32767"));
 
-    //There are no fields for these examples on the product form
-    //password validation
-    //Validator.Add("NewPassword",
+    //there are no field for these examples on the product from
+
+    //Password validation
+    //Validation.Add("NewPassword",
     //    Validator.Required("Missing new password"),
-    //    Validator.StringLength(40, 6, "Password does not meet the criteria"),
-    //    Validator.EqualsTo("ConfirmPassword", "New Password not confirmed."));
+    //    Validator.StringLength(40,6,"Invalid new password"),
+    //    Validator.EqualsTo("ConfirmPassword", "New password not confirmed."));
 
-    //Postal Code(Pattern Test)
+    //Postal Code (pattern test)
     //Validation.Add("PostalCode",
-    //    Validator.Regex("[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]", "Postal Code is Invalid"));
-
-    //Email Validator
+    //    Validator.Required("Missing postal code"),
+    //    Validator.Regex("[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]", "Postal code is invalid."));
 
 }
 @section banner{
-
     <h1>Database: Inserting data</h1> }
-<div>
-    <div class="alert alert-info">
-        <blockquote>
-            This form will demonstrate the create (insert) of CRUD. It will
-            demonstrate using bootstrap text alignment for setting up right align text,
-            default left align controls and centered aligned submit buttons.
-            The input controls and their label text controls are in a 2 columnn
-            format. The subnit buttons are centered on another row. the introduction
-            of the alert class. Tool tips are used. Review of Try/Catch.
-        </blockquote>
-    </div>
+    <div>
+        <div class="alert alert-info">
+            <blockquote>
+                This form will demonstrate the create (insert) of CRUD. It will
+                demonstrate using bootstrap text alignment for setting up right align text,
+                default left align controls and centered aligned submit buttons.
+                The input controls and their label text controls are in a 2 columnn
+                format. The subnit buttons are centered on another row. the introduction
+                of the alert class. Tool tips are used. Review of Try/Catch.
+            </blockquote>
+        </div>
 
     @if (IsPost)
     {
@@ -103,169 +97,157 @@
             discontinued = Request.Form["Discontinued"];
 
             //for validation controls on the server side to ACTUALLY fire, you
-            //  MUST execute the Validation.ISValid() method.
+            //  MUST execute the Validation.IsValid() method.
             if (Validation.IsValid())
             {
-                //If we assume that a supplier and category are actually required
-                //  We could test that the prompt line is not the selected value
+                //IF we ASSUME that a supplier and category are actually required
+                //   we could test that the prompt line is not the selected value
                 if (supplierid.Equals("0"))
                 {
-
+                    <p class="text-center"><span style="color:firebrick">
+                         Please select a supplier.</span></p>
                 }
                 else if (categoryid.Equals("0"))
                 {
-
+                    <p class="text-center"><span style="color:firebrick">
+                         Please select a category.</span></p>
                 }
                 else
-                {
-
-                }
-
-
-                //add this data to the database
-                try
-                {
-                    //connect to db
-                    //the db var is created at the top of the page as a global variable
-                    //     therefore there is no need to declare db here
-                    //var db = Database.Open("NWDB");
-                    //set up the command
-                    var insertcommand = "INSERT INTO Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued) "
-                        + "Values(@0, @1, @2, @3, @4, @5, @6, @7, @8)";
-                    //execute the command
-                    //BEcause the select tag willa always have a value,
-                    //  you can no longer use IsNullOrEmpty (this a textbox test)
-                    //Instead you will need yo test for a particular value .Equals("xxxx")
-                    db.Execute(insertcommand, productname,
-                        supplierid.Equals("0") ? null : supplierid,
-                        categoryid.Equals("0") ? null : categoryid,
-                        string.IsNullOrEmpty(quantityperunit) ? null : quantityperunit,
-                        string.IsNullOrEmpty(unitprice) ? null : unitprice,
-                        string.IsNullOrEmpty(unitsinstock) ? null : unitsinstock,
-                        string.IsNullOrEmpty(unitsonorder) ? null : unitsonorder,
-                        string.IsNullOrEmpty(reorderlevel) ? null : reorderlevel,
-                        0
-                        );
-                    <p class="col-sm-12 text-center">
-                        <span style="color:green"><strong>Product was added</strong></span>
-                    </p>
-                }
-                catch (Exception ex)
-                {
-                    <p class="col-sm-12 text-center">
-                        <span style="color:firebrick"><strong>@ex.Message</strong></span>
-                    </p>
-                }//eotc
-            }//eov
-        }//eosc
+                { 
+                    //add this data to the database
+                    try
+                    {
+                        //connect to db
+                        //the db var is created at the top of the page as a global variable
+                        //     therefore there is no need to declare db here
+                        //var db = Database.Open("NWDB");
+                        //set up the command
+                        var insertcommand = "INSERT INTO Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued) "
+                            + "Values(@0, @1, @2, @3, @4, @5, @6, @7, @8)";
+                        //execute the command
+                        //Because the select tag will always have a value,
+                        //    you can no longer us IsNullOrEmpty (athis is a textbox test)
+                        //Instead you will need to test for a particular value .Equals("xxxx")
+                        db.Execute(insertcommand, productname,
+                            supplierid.Equals("0") ? null : supplierid,
+                            categoryid.Equals("0") ? null : categoryid,
+                            string.IsNullOrEmpty(quantityperunit) ? null : quantityperunit,
+                            string.IsNullOrEmpty(unitprice) ? null : unitprice,
+                            string.IsNullOrEmpty(unitsinstock) ? null : unitsinstock,
+                            string.IsNullOrEmpty(unitsonorder) ? null : unitsonorder,
+                            string.IsNullOrEmpty(reorderlevel) ? null : reorderlevel,
+                            0
+                            );
+                        <p class="col-sm-12 text-center">
+                            <span style="color:green"><strong>Product was added</strong></span>
+                        </p>
+                    }
+                    catch (Exception ex)
+                    {
+                        <p class="col-sm-12 text-center">
+                            <span style="color:firebrick"><strong>@ex.Message</strong></span>
+                        </p>
+                    }//eotc
+                }//eoscindex
+            }//closing validation test
+        }
     }
-    
-
-
-
-    <!--displaying server side validation control messages
-        this can be done in 2 ways
-        a) using Html.ValidationSummary control
-            gives by default a bulleted list
-        b) beside the individual control using Html.ValidationMessage("xxxxxx")
-            where xxxxx is the control name-->
-    @Html.ValidationSummary()
-
-
-    <!--To view possible HTML 5 client side validation check out the url
-        www.w3.org/WAI/tutorials/forms/Validation-->
-
-    <form id="theForm" action="" method="post">
-        <div class="row">
-            <div class="col-sm-5 text-right">
-                <label id="ProductName">Name:</label><br />
-                <label id="SuppilerID">Supplier:</label><br />
-                <label id="CategoryID">Category:</label><br />
-                <label id="QuantityPerUnit">Size:</label><br />
-                <label id="UnitPrice">Price:</label><br />
-                <label id="UnitsInStock">QOH:</label><br />
-                <label id="UnitsOnOrder">QOO:</label><br />
-                <label id="ReorderLevel">ROL:</label><br />
-                <label id="Discontinued">Disc.:</label><br />
+        <!-- displaying server side Validation control messages
+            this can be done in two ways.
+            a) using Html.ValidationSummary control
+               gives by default a bulletted list of all errors
+            b) beside the individual control using Html.ValidationMessage("xxxxxxx")
+                 where xxxxxx is the control name-->
+        @Html.ValidationSummary()
+        <!-- to view possible HTML 5 client side validation check out the url
+            www.w3.org/WAI/tutorials/forms/Validation-->
+        <form id="theForm" action="" method="post">
+            <div class="row">
+                <div class="col-sm-5 text-right">
+                    <label id="ProductName">Name:</label><br />
+                    <label id="SuppilerID">Supplier:</label><br />
+                    <label id="CategoryID">Category:</label><br />
+                    <label id="QuantityPerUnit">Size:</label><br />
+                    <label id="UnitPrice">Price:</label><br />
+                    <label id="UnitsInStock">QOH:</label><br />
+                    <label id="UnitsOnOrder">QOO:</label><br />
+                    <label id="ReorderLevel">ROL:</label><br />
+                    <label id="Discontinued">Disc.:</label><br />
+                </div>
+                <div class="col-sm-7">
+                    <input name="ProductName" type="text" value="@productname"
+                           title="Enter Product Name"
+                           placeholder="product name" />
+                        @Html.ValidationMessage("ProductName")
+                    <br />
+                    <select id="SupplierID" name="SupplierID">
+                        <option value="0">select...</option>
+                        @foreach(var item in supplierlist)
+                        {
+                            //Position is determind based on the previous selected row
+                            //  (which row to set as selected).
+                            //The Request.Form["xxx"] obtained the posted
+                            //  select value from the user (under IsPost)
+                            //By the time the processer gets to this code
+                            //  a particular suppliedid value with exist
+                            if(item.SupplierID.ToString() == supplierid)
+                            {
+                                <option value="@item[0]" selected>@item.CompanyName</option>
+                            }
+                            else
+                            {
+                                <option value="@item[0]">@item.CompanyName</option>
+                            }
+                        }
+                    </select><br />
+                    <select id="CategoryID" name="CategoryID">
+                        <option value="0">select...</option>
+                        @foreach (var item in categorylist)
+                         {
+                            if (item.CategoryID.ToString() == categoryid)
+                            {
+                                 <option value="@item[0]" selected>@item.CategoryName</option>
+                            }
+                            else
+                            {
+                                 <option value="@item[0]">@item.CategoryName</option>
+                            }
+                                                        
+                         }
+                    </select><br />
+                    <input name="QuantityPerUnit" type="text" value="@quantityperunit"
+                           title="Enter Product Size" 
+                           placeholder="quantity per unit" /><br />
+                    <input name="UnitPrice" type="text" value="@unitprice"
+                           title="Enter Unit Price" 
+                           placeholder="unit price" /><br />
+                    <input name="UnitsInStock" type="text" value="@unitsinstock"
+                           title="Enter quantity on hand" 
+                           placeholder="quantity on hand" /><br />
+                    <input name="UnitsOnOrder" type="text" value="@unitsonorder"
+                           title="Enter quantity on order"
+                           placeholder="quantity on order" /><br />
+                    <input name="ReorderLevel" type="text" value="@reorderlevel"
+                           title="Enter reorder level"
+                           placeholder="reorder level" /><br />
+                    <input name="Discontinued" type="checkbox"
+                           title="Discontinued if checked"
+                           @(string.IsNullOrEmpty(discontinued) ? "" : "Checked") />
+                    ( discontined if checked)<br />
+                </div>
             </div>
-            <div class="col-sm-7">
-                <input name="ProductName" type="text" value="@productname"
-                       title="Enter Product Name"
-                       placeholder="product name" required /><br />
-                @Html.ValidationMessage("ProductName")
-
-                <select id="SupplierID" name="SupplierID">
-                    <option value="0">select.....</option>
-                    @foreach (var item in supplierlist)
-                    {
-                        //to determine based on the previous selected row
-                        //  which row to set as selected.
-                        //The Request.Form["xxx"] obtained the posted
-                        //  select value from the user (under IsPost)
-                        //By the time the processor gets to this code
-                        //  a particular supplierID value will exist
-                        if (item.SupplierID.ToString() == supplierid)
-                        {
-                            <option value="@item[0]" selected>@item.CompanyName</option>
-                        }
-                        else
-                        {
-                            <option value="@item[0]">@item.CompanyName</option>
-                        }
-
-                    }
-                </select><br />
-
-                <select id="CategoryID" name="CategoryID">
-                    <option value="0">select.....</option>
-                    @foreach (var item in categorylist)
-                    {
-                        if (item.CategoryID.ToString() == categoryid)
-                        {
-                            <option value="@item.CategoryID" selected>@item[1]</option>
-                        }
-                        else
-                        {
-                            <option value="@item.CategoryID">@item[1]</option>
-                        }
-
-                    }
-                </select><br />
-
-
-                <input name="QuantityPerUnit" type="text" value="@quantityperunit"
-                       title="Enter Product Size"
-                       placeholder="quantity per unit" /><br />
-                <input name="UnitPrice" type="number" value="@unitprice"
-                       title="Enter Unit Price"
-                       placeholder="unit price" /><br />
-                <input name="UnitsInStock" type="text" value="@unitsinstock"
-                       title="Enter quantity on hand"
-                       placeholder="quantity on hand" /><br />
-                <input name="UnitsOnOrder" type="text" value="@unitsonorder"
-                       title="Enter quantity on order"
-                       placeholder="quantity on order" /><br />
-                <input name="ReorderLevel" type="text" value="@reorderlevel"
-                       title="Enter reorder level"
-                       placeholder="reorder level" /><br />
-                <input name="Discontinued" type="checkbox"
-                       title="Discontinued if checked"
-                       @(string.IsNullOrEmpty(discontinued) ? "" : "Checked") />
-                ( discontined if checked)<br />
+            <div>
+                <div class="col-sm-12 text-center">
+                    <button type="submit" name="formButton" value="submit"
+                            class="btn btn-primary" style="width:90px">
+                        Add
+                    </button>
+                    &nbsp;&nbsp;
+                    <button type="submit" name="formButton" value="clear"
+                            class="btn" style="width:90px">
+                        Clear
+                    </button>
+                </div>
             </div>
-        </div>
-        <div>
-            <div class="col-sm-12 text-center">
-                <button type="submit" name="formButton" value="submit"
-                        class="btn btn-primary" style="width:90px">
-                    Add
-                </button>
-                &nbsp;&nbsp;
-                <button type="submit" name="formButton" value="clear"
-                        class="btn" style="width:90px">
-                    Clear
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
