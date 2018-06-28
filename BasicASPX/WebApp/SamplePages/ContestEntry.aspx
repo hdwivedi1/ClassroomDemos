@@ -16,7 +16,7 @@
 
         </div>
     </div>
-
+    <div class ="grid-form">
         <h3>Contest Entry</h3>
         <asp:Label ID="Label1" runat="server" Text="First Name"
                 AssociatedControlID="FirstName"></asp:Label>
@@ -45,7 +45,7 @@
                   
         <asp:Label ID="Label6" runat="server" Text="Province"
             AssociatedControlID="Province"></asp:Label>
-        <asp:DropDownList ID="Province" runat="server" Width="75px">
+        <asp:DropDownList ID="Province" runat="server" >
             <asp:ListItem Value="AB" Text="AB"></asp:ListItem>
             <asp:ListItem Value="BC" Text="BC"></asp:ListItem>
             <asp:ListItem Value="MN" Text="MN"></asp:ListItem>
@@ -83,6 +83,6 @@
         </p>
                
         <asp:Label ID="Message" runat="server" Text="bob" ></asp:Label>
-      
+      </div>
     
 </asp:Content>

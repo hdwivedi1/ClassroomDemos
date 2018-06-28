@@ -98,7 +98,7 @@ namespace WebApp.SamplePages
                 }
                 else
                 {
-                    CheckBoxChoice = false;
+                    CheckBoxChoice.Checked = false;
                 }
 
                 //DropdownList : Property: SelectedValue (preferred)
