@@ -92,9 +92,9 @@ namespace WebApp.SamplePages
                 RadioButtonListChoice.SelectedValue = submitchoice;
 
                 //Checkbox Property: Checked (boolean)
-                if(submitchoice.Equals("2") || submitchoice.Equals("4"))
+                if (submitchoice.Equals("2") || submitchoice.Equals("4"))
                 {
-                    CheckBoxChoice.Checked = true;                
+                    CheckBoxChoice.Checked = true;
                 }
                 else
                 {
@@ -120,10 +120,36 @@ namespace WebApp.SamplePages
 
         protected void LinkButtonSubmitChoice_Click(object sender, EventArgs e)
         {
-            //Label Property: Text
-            MessageLabel.Text = "You pressed the Submit Choice linkbutton";
+            //when you have a promptline in your dropdownlist, you should 
+            if (CollectionList.SelectedIndex == 0)
+            {
+                MessageLabel.Text = "Please Select A Course";
+            }
+            else
+            {
+                //DDL Property: SelectedIndex, SelectedItem, SelectedItem
+                string ddlselection = CollectionList.SelectedValue;
+                TextBoxNumberChoice.Text = ddlselection;
+                RadioButtonListChoice.SelectedValue = ddlselection;
+                //Checkbox Property: Checked (boolean)
+                if (ddlselection.Equals("2") || ddlselection.Equals("4"))
+                {
+                    CheckBoxChoice.Checked = true;
+                }
+                else
+                {
+                    CheckBoxChoice.Checked = false;
+                }
+                DisplayDataReadOnly.Text = CollectionList.SelectedItem.Text
+                       + "at index" + CollectionList.SelectedIndex.ToString()
+                       + "having a value of" + CollectionList.SelectedValue;
+            }
+
+
+
+
         }
 
-       
+
     }
 }
