@@ -1,7 +1,7 @@
 ﻿/* CSS-Grid form formatting
     grid specifies that CSS-Grid is used
     gap distance between row/column
-    template-columns allows one to specify the physical size of each column in the grid
+    template-columns allows one to specify the physical of each column in the grid
 */
 .grid-form{
     display: grid;
@@ -13,7 +13,7 @@
     the grid-column has 2 parameter values column to start in / span 2 more columns (in total the row will have 3 columns)
 */
 .grid-form > * {
-    grid-column: 2 / span 2    
+    grid-column: 2 / span 2;
 }
 
 /* refining items within grid-form using specific html tag names
@@ -21,6 +21,7 @@
 */
 .grid-form > label {
     grid-column: 1;
+    text-align: right;
 }
 
 .grid-form > h3 {
@@ -31,7 +32,27 @@
     grid-column: 2;
 }
 
-    .grid-form > input[type=checkbox] + label {
+.grid-form > input[type=checkbox] + label {
         grid-column: 3;
         text-align: left;
-    }
+}
+.checkboxgrid-form {
+    display: grid;
+    grid-template-columns: 15px auto;
+    grid-column-gap: 2px;
+}
+
+.checkboxgrid-form > * {
+    grid-column: 1 / span 2;
+}
+
+.checkboxgrid-form > input[type=checkbox] {
+    grid-column: 1;
+    margin-top: 0px;
+}
+
+.checkboxgrid-form > input[type=checkbox] + label {
+    grid-column: 2;
+    text-align: left;
+    margin-top: 2px;
+}

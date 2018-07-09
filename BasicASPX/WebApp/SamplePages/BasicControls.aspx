@@ -40,7 +40,8 @@
                 <td  align="right">
                     <asp:Literal ID="Literal1" runat="server" Text="Choice: CheckBox"></asp:Literal></td>
                 <td>
-                    <asp:CheckBox ID="CheckBoxChoice" runat="server" /></td>
+                    <asp:CheckBox ID="CheckBoxChoice" runat="server"
+                        text="(checked if a programming course)"/></td>
             </tr>
             <tr>
                 <td  align="right">

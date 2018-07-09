@@ -91,47 +91,48 @@ namespace WebApp.SamplePages
                 //SelectedItem returns the data display associated with the physical line
                 RadioButtonListChoice.SelectedValue = submitchoice;
 
-                //Checkbox Property: Checked (boolean)
+                //CheckBox: Property: Checked (boolean)
                 if (submitchoice.Equals("2") || submitchoice.Equals("4"))
                 {
+                    //show check mark in control
                     CheckBoxChoice.Checked = true;
                 }
                 else
                 {
+                    //no check mark in control
                     CheckBoxChoice.Checked = false;
                 }
 
-                //DropdownList : Property: SelectedValue (preferred)
-                //                       : SelectedIndex
+                //DropDownList : Property :SelectedValue (preferred)
+                //                        :SelectedIndex
                 CollectionList.SelectedValue = submitchoice;
 
                 //Label (Literal) Property : Text
-                //demonstrate using SelectedIndex, SelectedValue and 
-                // SelectedItem
+                //demostrate using SelectedIndex, SelectedValue and SelectedItem
                 // to obtain data off the dropdownlist
-                // to obtain data off the dropdownlist
-                //the data will be concatenated into a single string
+                //The data will be concatentated into a single string
                 DisplayDataReadOnly.Text = CollectionList.SelectedItem.Text
-                    + "at index" + CollectionList.SelectedIndex.ToString()
-                    + "having a value of" + CollectionList.SelectedValue;
+                      + " at index " + CollectionList.SelectedIndex.ToString()
+                      + " having a value of " + CollectionList.SelectedValue;
 
             }
         }
 
         protected void LinkButtonSubmitChoice_Click(object sender, EventArgs e)
         {
-            //when you have a promptline in your dropdownlist, you should 
+            //when you have a prompt line in your dropdownlist, you should
+            //   test for it and do appropriate code to handle the situation
             if (CollectionList.SelectedIndex == 0)
             {
-                MessageLabel.Text = "Please Select A Course";
+                MessageLabel.Text = "Please selected a course.";
             }
             else
             {
-                //DDL Property: SelectedIndex, SelectedItem, SelectedItem
+                //DDL Property: SelectedValue, SelectedIndex, SelectedItem
                 string ddlselection = CollectionList.SelectedValue;
                 TextBoxNumberChoice.Text = ddlselection;
                 RadioButtonListChoice.SelectedValue = ddlselection;
-                //Checkbox Property: Checked (boolean)
+                //CheckBox: Property: Checked (boolean)
                 if (ddlselection.Equals("2") || ddlselection.Equals("4"))
                 {
                     CheckBoxChoice.Checked = true;
@@ -141,15 +142,13 @@ namespace WebApp.SamplePages
                     CheckBoxChoice.Checked = false;
                 }
                 DisplayDataReadOnly.Text = CollectionList.SelectedItem.Text
-                       + "at index" + CollectionList.SelectedIndex.ToString()
-                       + "having a value of" + CollectionList.SelectedValue;
+                       + " at index " + CollectionList.SelectedIndex.ToString()
+                       + " having a value of " + CollectionList.SelectedValue;
             }
-
-
-
+            
 
         }
 
-
+       
     }
 }
