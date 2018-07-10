@@ -47,14 +47,14 @@
                      AssociatedControlID="FullOrPartTime"></asp:Label>
                 <asp:RadioButtonList ID="FullOrPartTime" runat="server"
                      RepeatDirection="Horizontal" RepeatLayout="Flow">
-                    <asp:ListItem Value="1">&nbsp;Full Time&nbsp;&nbsp;</asp:ListItem>
-                    <asp:ListItem Value="2">&nbsp;Part Time&nbsp;&nbsp;</asp:ListItem>
+                    <asp:ListItem>&nbsp;Full Time&nbsp;&nbsp;</asp:ListItem>
+                    <asp:ListItem>&nbsp;Part Time&nbsp;&nbsp;</asp:ListItem>
                 </asp:RadioButtonList>
         
                 <asp:Label ID="Label5" runat="server" Text="Jobs"
                      AssociatedControlID="Jobs"></asp:Label>
                 <asp:CheckBoxList ID="Jobs" runat="server"
-                     RepeatLayout="Flow" CssClass="checkboxgrid-form" >
+                     RepeatLayout="Flow"  >
                     <asp:ListItem>Sales</asp:ListItem>
                     <asp:ListItem>Manufacturing</asp:ListItem>
                     <asp:ListItem>Accounting</asp:ListItem>
