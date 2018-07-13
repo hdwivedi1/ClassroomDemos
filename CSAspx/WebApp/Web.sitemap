@@ -2,8 +2,8 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode url="" title="root"  description="">
     <siteMapNode url="~/Default.aspx" title="Home"  description="" />
-    <siteMapNode url="" title="Exercise" description="">
-      <siteMapNode url="~/ExercisePages/Default.aspx" title="Default"
+    <siteMapNode url="" title="Sample" description="">
+      <siteMapNode url="~/SamplePages/Query.aspx" title="Pkey Query"
                     description="" />
     </siteMapNode>
     <siteMapNode url="~/About.aspx" title="About"  description="" />
