@@ -35,5 +35,7 @@ namespace NorthwindSystem.DAL
         //  this is done by using the Dbcontext datatype DbSet<T>
         //      where <T> is the data definition class
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
     }
 }
