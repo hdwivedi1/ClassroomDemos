@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,23 +11,22 @@ using NorthwindSystem.DAL;
 
 namespace NorthwindSystem.BLL
 {
-    class SupplierController
+    public class SupplierController
     {
-        public List<Supplier> Supplier_List()
+        public List<Supplier> Suppliers_List()
         {
             using (var context = new NorthwindContext())
             {
                 return context.Suppliers.ToList();
             }
-            public Supplier Suppliers_GetSupplier(int supplierid)
+        }
+
+        public Supplier Suppliers_GetSupplier(int supplierid)
+        {
+            using (var context = new NorthwindContext())
             {
-                using (var context = new NorthwindContext())
-                {
-                    return context.Suppliers.Find(supplierid);
-                }
+                return context.Suppliers.Find(supplierid);
             }
         }
     }
 }
-
-

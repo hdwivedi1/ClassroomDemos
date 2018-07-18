@@ -1,1 +1,1 @@
-﻿This folder will hold the system inteface controller classes for the solution
+﻿This folder will hold the system interface controller classes for the solution.

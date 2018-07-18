@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,7 @@ using NorthwindSystem.DAL;
 
 namespace NorthwindSystem.BLL
 {
-    class CategoryController
+    public class CategoryController
     {
         public List<Category> Categories_List()
         {
@@ -20,9 +19,9 @@ namespace NorthwindSystem.BLL
             {
                 return context.Categories.ToList();
             }
-
         }
-        public Category Categories_GetCetegory(int categoryid)
+
+        public Category Categories_GetCategory(int categoryid)
         {
             using (var context = new NorthwindContext())
             {
