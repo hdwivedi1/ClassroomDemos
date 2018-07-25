@@ -23,7 +23,8 @@
             <asp:Label ID="label1" runat="server" AssociatedControlID="ProductList"
                 text="Select a product to manage:"></asp:Label>
             <asp:DropDownList ID="ProductList" runat="server"></asp:DropDownList>
-             <asp:Button ID="SearchProduct" runat="server" OnClick="SearchProduct_Click" text="Fetch"></asp:Button>
+             <asp:Button ID="SearchProduct" runat="server" OnClick="SearchProduct_Click" text="Fetch"
+                  CausesValidation="false"></asp:Button>
             <br/>
             <asp:Label ID="Label2" runat="server" AssociatedControlID="ProductID" 
                 text="ID:"></asp:Label>
@@ -66,19 +67,13 @@
             <asp:CheckBox ID="Discontinued" runat="server" Text="(discontinued if checked)" />
         </div>
     </div>
-    <div class="row">
-    <asp:Button ID="Add" runat="server" Text="Add" OnClick="Add_Click" /> 
-
-
-    <asp:Button ID="Update" runat="server" Text="Update" OnClick="Update_Click" />
-
-
-    <asp:Button ID="Delete" runat="server" Text="Delete" OnClick="Delete_Click" />
-
-
-    <asp:Button ID="Clear" runat="server" Text="Clear" OnClick="Clear_Click" />
-
-
+    <br />
+    <div class="row col-md-offset-2">
+        <asp:Button ID="Add" runat="server" Text="Add"  
+            height="26px" OnClick="Add_Click" width="67px" />&nbsp;&nbsp;
+        <asp:Button ID="Update" runat="server" Text="Update" OnClick="Update_Click" />&nbsp;&nbsp;
+        <asp:Button ID="Delete" runat="server" Text="Delete" height="26px" OnClick="Delete_Click" width="67px" CausesValidation="false" />&nbsp;&nbsp;
+        <asp:Button ID="Clear" runat="server" Text="Clear" height="26px" OnClick="Clear_Click" width="67px"
+            CausesValidation="false" />
     </div>
-
 </asp:Content>
