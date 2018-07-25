@@ -14,7 +14,7 @@ namespace Northwind.Data.Entities
     //the Table annotation points to the table in the sql
     //    database that this class definites
     [Table("Products")]
-    public class Product
+    public class Category
     {
         //create a property for each attribute on the
         //   sql table
@@ -46,6 +46,11 @@ namespace Northwind.Data.Entities
         public Int16? UnitsOnOrder { get; set; }
         public Int16? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
+
+        public static object CompanyName()
+        {
+            throw new NotImplementedException();
+        }
 
         // sometimes you will want another property in your class
         //    that will return a non attribute value to the user

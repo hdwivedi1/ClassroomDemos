@@ -15,15 +15,17 @@ namespace NorthwindSystem.BLL
     //this is the public interface class that will handle
     //  web page service requests for data to the Product sql table
     //Methods in this class can interact with the internal DAL Context class
-    public class ProductController
+    public class CategoryController
     {
+        
+
         //this method will return all records from the sql table Products
         //this will first create a transaction code block which uses
         //    the DAL Context class
         //the Context class has a DbSet<Product> property for referencing
         //    the sql table
         //The property works with EntityFramework to retrieve the data
-        public List<Product> Products_List()
+        public List<Category> Products_List()
         {
             using (var context = new NorthwindContext())
             {
@@ -33,12 +35,17 @@ namespace NorthwindSystem.BLL
 
         //this method will return a specific record from the sql
         //    Products table based on the primary key
-        public Product Products_GetProduct(int productid)
+        public Category Products_GetProduct(int productid)
         {
             using (var context = new NorthwindContext())
             {
                 return context.Products.Find(productid);
             }
+        }
+
+        public List<Category> Categories_List()
+        {
+            throw new NotImplementedException();
         }
     }
 }

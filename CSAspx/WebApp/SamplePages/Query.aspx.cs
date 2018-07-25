@@ -40,12 +40,12 @@ namespace WebApp.SamplePages
         {
             try
             {
-                ProductController sysmgr = new ProductController();
-                List<Product> info = sysmgr.Products_List();
+                CategoryController sysmgr = new CategoryController();
+                List<Category> info = sysmgr.Products_List();
                 info.Sort((x, y) => x.ProductName.CompareTo(y.ProductName));
                 ProductList.DataSource = info;
-                ProductList.DataTextField = nameof(Product.ProductName);
-                ProductList.DataValueField = nameof(Product.ProductID);
+                ProductList.DataTextField = nameof(Category.ProductName);
+                ProductList.DataValueField = nameof(Category.ProductID);
                 ProductList.DataBind();
                 ProductList.Items.Insert(0, "select ...");
             }
@@ -59,11 +59,43 @@ namespace WebApp.SamplePages
         public void BindSupplierList()
         {
             //TODO: code the method to load the SupplierList control
+            try
+            {
+                SupplierController sysmgr = new SupplierController();
+                List<Supplier> info = sysmgr.Suppliers_List();
+                info.Sort((x, y) => x.CompanyName.CompareTo(y.CompanyName));
+                ProductList.DataSource = info;
+                ProductList.DataTextField = nameof(Category.CompanyName);
+                ProductList.DataValueField = nameof(Category.SupplierID);
+                ProductList.DataBind();
+                ProductList.Items.Insert(0, "select ...");
+            }
+            catch (Exception ex)
+            {
+                errormsgs.Add("File Error: " + GetInnerException(ex).Message);
+                LoadMessageDisplay(errormsgs, "alert alert-warning");
+            }
         }
 
         public void BindCategoryList()
         {
             //TODO: code the method to load the CategoryList control
+            try
+            {
+                CategoryController sysmgr = new CategoryController();
+                List<Category> info = sysmgr.Categories_List;
+                info.Sort((x, y) => x.CategoryName.CompareTo(y.CategoryName));
+                ProductList.DataSource = info;
+                ProductList.DataTextField = nameof(Category.CategoryName);
+                ProductList.DataValueField = nameof(Category.CategoryID);
+                ProductList.DataBind();
+                ProductList.Items.Insert(0, "select ...");
+            }
+            catch (Exception ex)
+            {
+                errormsgs.Add("File Error: " + GetInnerException(ex).Message);
+                LoadMessageDisplay(errormsgs, "alert alert-warning");
+            }
         }
 
         //use this method to discover the inner most error message.
@@ -93,6 +125,80 @@ namespace WebApp.SamplePages
         protected void SearchProduct_Click(object sender, EventArgs e)
         {
             //TODO: code this method to lookup and display the selected product
+
+            //do you have something to search for
+            //the dropdownlist has a prompt line in index 0
+            if (ProductList.SelectedIndex == 0)
+            {
+                errormsgs.Add("File Error: " + GetInnerException(ex).Message);
+                LoadMessageDisplay(errormsgs, "alert alert-warning");
+            }
+            else
+            {
+
+            }
+            //  user-friendly error handling
+            try
+            {
+                //to use an object create an instance of the object
+                CategoryController sysmgr = new CategoryController();
+
+                //call the appropriate method within your instance
+                Product info = sysmgr.Products_GetProduct(int.Parse(ProductList.SelectedValue));
+
+                //check that a product is checked against null
+                //single record data is checked against null
+                //multirecord data is checked against .count
+                if(info == null)
+                {
+                    //the product was not found
+                    //message to the user
+                    //refresh the incorrect dropdownlist to reflect the accurate current productlist
+                    errormsgs.Add("Product was not found. Select and try again.");
+                    LoadMessageDisplay(errormsgs, "alert alert-warning");
+                    BindProductList();
+                }
+                else
+                {
+                    //product was found, display
+                    ProductID.Text = info.ProductID.ToString();
+                    ProductName.Text = info.ProductName;
+                    SupplierList.SelectedValue = info.SupplierID == null ? "select....." : 
+                                                info.SupplierID.ToString();
+                    CategoryList.SelectedValue = info.CategoryID == null ? "select....." :
+                                                info.CategoryID.ToString();
+                    QuantityPerUnit.Text = info.QuantityPerUnit == null ? "" : info.QuantityPerUnit;
+                    UnitPrice.Text = info.UnitPrice == null ? "" : string.Format("0:0.00"),
+                    info.UnitPrice);
+                    UnitsInStock.Text = info.UnitsInStock == null ? "" : info.UnitsInStock
+                }
+              
+            }
+            catch(Exception ex)
+            {
+                errormsgs.Add("File Error: " + GetInnerException(ex).Message);
+                LoadMessageDisplay(errormsgs, "alert alert-warning");
+            }
+        }
+
+        protected void Clear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Delete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Update_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Add_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

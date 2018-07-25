@@ -66,5 +66,19 @@
             <asp:CheckBox ID="Discontinued" runat="server" Text="(discontinued if checked)" />
         </div>
     </div>
+    <div class="row">
+    <asp:Button ID="Add" runat="server" Text="Add" OnClick="Add_Click" /> 
+
+
+    <asp:Button ID="Update" runat="server" Text="Update" OnClick="Update_Click" />
+
+
+    <asp:Button ID="Delete" runat="server" Text="Delete" OnClick="Delete_Click" />
+
+
+    <asp:Button ID="Clear" runat="server" Text="Clear" OnClick="Clear_Click" />
+
+
+    </div>
 
 </asp:Content>
