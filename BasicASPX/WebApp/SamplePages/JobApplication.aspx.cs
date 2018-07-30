@@ -20,8 +20,8 @@ namespace WebApp.SamplePages
             EmailAddress.Text = "";
             PhoneNumber.Text = "";
             FullOrPartTime.ClearSelection();
-            //FullNameOrPartTime.SelectedIndex = -1;
-            Jobs.ClearSelection();
+            //FullOrPartTime.SelectedIndex = -1;
+            Jobs.ClearSelection(); 
         }
 
         protected void Submit_Click(object sender, EventArgs e)

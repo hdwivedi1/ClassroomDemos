@@ -54,7 +54,7 @@
                 <asp:Label ID="Label5" runat="server" Text="Jobs"
                      AssociatedControlID="Jobs"></asp:Label>
                 <asp:CheckBoxList ID="Jobs" runat="server"
-                     RepeatLayout="Flow" CssClass="checkboxgrid-form" >
+                     RepeatLayout="Flow" CssClass="checkboxgrid-form"  >
                     <asp:ListItem>Sales</asp:ListItem>
                     <asp:ListItem>Manufacturing</asp:ListItem>
                     <asp:ListItem>Accounting</asp:ListItem>
